@@ -8,7 +8,6 @@ bin:
 		f=$$(basename $$file); \
 		sudo ln -sf $$file /usr/local/bin/$$f; \
 	done
-	sudo ln -sf $(CURDIR)/bin/browser-exec /usr/local/bin/xdg-open; \
 
 dotfiles:
 	# add aliases for dotfiles
@@ -16,7 +15,6 @@ dotfiles:
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
 	done; \
-	ln -sfn $(CURDIR)/.gnupg/gpg.conf $(HOME)/.gnupg/gpg.conf;
 	ln -fn $(CURDIR)/gitignore $(HOME)/.gitignore;
 
 etc:

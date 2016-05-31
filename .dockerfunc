@@ -39,6 +39,7 @@ composer(){
     echo "Current working directory: '"$(pwd)"'"
     docker run -it --rm \
         --name composer \
+        -v /etc/localtime:/etc/localtime:ro \
         -v $(pwd):/app \
         -v $HOME/.docker/composer:/root/composer \
         -v $HOME/.ssh:/root/.ssh \
@@ -59,16 +60,16 @@ node(){
     del_stopped node
         #-v $HOME/.docker/node:/usr/local/lib \
     docker run -it --rm \
-        --name node \
+        -v /etc/localtime:/etc/localtime:ro \
         -v $(pwd):/app \
         -w /app \
         node node "$@"
 }
 npm(){
-    del_stopped npm
-
+    del_stopped node
+        #-v $HOME/.docker/node:/usr/local/lib \
     docker run -it --rm \
-        --name npm \
+        -v /etc/localtime:/etc/localtime:ro \
         -v $(pwd):/app \
         -w /app \
         node npm "$@"
@@ -79,6 +80,7 @@ tns(){
     docker run -it --rm \
         --privileged \
         --name tns \
+        -v /etc/localtime:/etc/localtime:ro \
         -v /dev/bus/usb:/dev/bus/usb \
         -v $(pwd):/src \
         oreng/nativescript tns "$@"
